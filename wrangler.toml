@@ -1,0 +1,35 @@
+# Cloudflare Workers Blog 配置文件
+# 部署命令: wrangler deploy
+
+name = "cfblog"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# ====== KV 命名空间（二选一）======
+# 方式1：通过 Cloudflare Dashboard 手动绑定 KV 到此 Worker（推荐，无需改此文件）
+# 方式2：取消下方注释，填入你创建的 KV namespace ID
+# [[kv_namespaces]]
+# binding = "CFBLOG"
+# id = "你的KV_NAMESPACE_ID"
+
+# ====== 环境变量 ======
+# 打包在代码中的公开配置（非敏感，直接放这里即可）
+[vars]
+siteDomain = "mzfaq.com"
+siteName = "CF workers blog"
+siteDescription = "A Blog Powered By Cloudflare Workers and KV"
+keyWords = "cloudflare,KV,workers,blog"
+pageSize = "5"
+recentlySize = "6"
+readMoreLength = "150"
+cacheTime = "43200"
+themeURL = "https://raw.githubusercontent.com/thriken/cloudflare-workers-blog/master/themes/default2.0/"
+copyRight = "Powered by <a href=\"https://www.cloudflare.com\">CF Workers</a> & <a href=\"https://mzfaq.com\">CF-Blog </a>"
+
+# ====== 敏感信息（不要在代码中硬编码）======
+# 以下变量通过 CF Workers Dashboard → Settings → Variables 设置，
+# 或通过 wrangler secret put 命令设置：
+#   wrangler secret put ADMINUSER
+#   wrangler secret put PASSWD
+#   wrangler secret put CACHEZONEID
+#   wrangler secret put CACHETOKEN

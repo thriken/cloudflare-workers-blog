@@ -1,14 +1,14 @@
 'use strict';
 const OPT = {
-    "user" : globalThis.env.ADMINUSER, //后台密码请修改
-    "password" : globalThis.env.PASSWD, //后台密码
+    "user" : ADMINUSER, //后台用户名，通过 wrangler.toml [vars] 或 Cloudflare Dashboard Secrets 设置
+    "password" : PASSWD, //后台密码，通过 wrangler.toml [vars] 或 Cloudflare Dashboard Secrets 设置
+    "cacheZoneId":CACHEZONEID,//清理缓存用 cf区域 ID，通过 wrangler.toml [vars] 或 Dashboard Secrets 设置
+    "cacheToken":CACHETOKEN,//清理缓存用 cf API token，通过 wrangler.toml [vars] 或 Dashboard Secrets 设置
+	
     "siteDomain" : "mzfaq.com",// 域名(不带https 也不带/)
     "siteName" : "CF workers blog",//博客名称
     "siteDescription":"A Blog Powered By Cloudflare Workers and KV",//博客描述
     "keyWords":"cloudflare,KV,workers,blog",//关键字
-    "cacheZoneId":globalThis.env.CACHEZONEID,//清理缓存用 cf区域 ID
-    "cacheToken":globalThis.env.CACHETOKEN,//清理缓存用 cf API token
-	
     "pageSize" : 5,//每页文章数
     "recentlySize" : 6,//最近文章数
     "readMoreLength":150,//阅读更多截取长度	
