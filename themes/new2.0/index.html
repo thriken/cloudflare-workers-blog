@@ -13,9 +13,9 @@
 				<meta charset="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="profile" href="http://gmpg.org/xfn/11" />
-				<!-- <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/gdtool/zhaopp/cfblog/favicon.ico" />-->
-				<!-- <link rel="Shortcut Icon" href="https://cdn.jsdelivr.net/gh/gdtool/zhaopp/cfblog/favicon.ico">-->
-				<title>{{ &title }}</title>
+				<!-- <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/thriken/cloudflare-workers-blog/cfblog/favicon.ico" />-->
+				<!-- <link rel="Shortcut Icon" href="https://cdn.jsdelivr.net/gh/thriken/cloudflare-workers-blog/cfblog/favicon.ico">-->
+				<title>{{ &title }} {{ &OPT.user }} </title>
 				<meta name="keywords" content="{{ &keyWords }}" />
 				<meta name="description" content="{{ &OPT.siteDescription }}" />
 				<link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -84,7 +84,65 @@
 				<link rel="stylesheet" id="themonic-style-css" href="https://cdn.jsdelivr.net/gh/thriken/cloudflare-workers-blog@master/themes/default/style.css" origin="themes/default/style.css" type="text/css" media="all" />
 				<link rel="stylesheet" id="custom-style-css" href="https://cdn.jsdelivr.net/wp/themes/iconic-one/2.1.8/custom.min.css?ver=5.6" type="text/css" media="all" />
 				<meta name="generator" content="WordPress 5.6" />
-				<style type="text/css" id="wp-custom-css">@media (max-width: 768px) { #secondary { display:none !important; } #menu-top{ display:none !important; } .site-content { float: left; width: 92%; padding: 30px 2% 0 1%; } .site-description{ display:none !important; } .io-title-description { display: inline-block; margin: 17px 0; padding: 0px 0; float: none; } .wrapper { border: 1px solid #16a1e7 !important; } }</style>
+				<style type="text/css" id="wp-custom-css">
+				/* ===== 响应式基础样式 ===== */
+				@media (max-width: 768px) {
+					#secondary { display: none !important; }
+					#menu-top { display: none !important; }
+					.site-content { float: left; width: 92%; padding: 30px 2% 0 1%; }
+					.site-description { display: none !important; }
+					.io-title-description { display: inline-block; margin: 17px 0; padding: 0px 0; float: none; }
+					.wrapper { border: 1px solid #16a1e7 !important; }
+				}
+				/* ===== 平板适配 (769px - 1024px) ===== */
+				@media (max-width: 1024px) and (min-width: 769px) {
+					#secondary { width: 25%; }
+					.site-content { width: 72%; }
+					.io-title-description { padding: 0 10px; }
+				}
+				/* ===== 移动端增强样式 ===== */
+				@media (max-width: 768px) {
+					/* 头部优化 */
+					.site-header { padding: 10px 15px; text-align: center; }
+					.io-title-description { width: 100%; }
+					.io-title-description a { font-size: 1.5em; }
+					
+					/* 文章列表优化 */
+					.post { padding: 15px 10px; margin-bottom: 15px; }
+					.entry-title { font-size: 1.3em; line-height: 1.4; }
+					.entry-title a { word-break: break-all; }
+					.entry-summary { font-size: 0.95em; line-height: 1.6; }
+					.excerpt-thumb { float: none !important; width: 100% !important; margin-bottom: 10px; }
+					.excerpt-thumb img { width: 100% !important; height: auto !important; }
+					
+					/* 标签和分类优化 */
+					.entry-meta { font-size: 0.85em; flex-wrap: wrap; gap: 8px; }
+					.entry-meta span { display: block; width: 100%; margin: 2px 0; }
+					
+					/* 分页优化 */
+					.navigation { padding: 15px 0; }
+					.nav-previous, .nav-next { width: 100%; text-align: center; margin: 5px 0; }
+					
+					/* 底部版权 */
+					.site-wordpress { font-size: 0.8em; padding: 10px; }
+				}
+				/* ===== 图片响应式 ===== */
+				@media (max-width: 600px) {
+					img { max-width: 100% !important; height: auto !important; }
+					.entry-content img { max-width: 100% !important; }
+					.wp-post-image { max-width: 100% !important; }
+				}
+				/* ===== 代码块响应式 ===== */
+				@media (max-width: 768px) {
+					pre, code { font-size: 0.85em !important; overflow-x: auto; max-width: 100%; }
+					.entry-content pre { padding: 10px !important; margin: 10px 0 !important; }
+				}
+				/* ===== 表格响应式 ===== */
+				@media (max-width: 768px) {
+					table { display: block; overflow-x: auto; width: 100% !important; }
+					.entry-content table { display: block; overflow-x: auto; }
+				}
+				</style>
 				<link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.3.2/styles/tomorrow-night-bright.min.css">
 				<script src='https://cdn.staticfile.org/highlight.js/10.3.2/highlight.min.js'></script>
 				{{ &OPT.codeBeforHead }}
@@ -218,7 +276,7 @@
 				<!-- #page -->
 				<script type="text/javascript" src="https://cdn.jsdelivr.net/wp/themes/iconic-one/2.1.8/js/selectnav.min.js?ver=1.0" id="themonic-mobile-navigation-js"></script>
 				<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/WordPress/WordPress@5.6/wp-includes/js/clipboard.min.js?ver=5.6" id="clipboard-js"></script>
-				<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/gdtool/zhaopp/cfblog/wp-embed.min.js?ver=5.6" id="wp-embed-js"></script>
+				<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/thriken/cloudflare-workers-blog/cfblog/wp-embed.min.js?ver=5.6" id="wp-embed-js"></script>
 				<script>hljs.initHighlightingOnLoad(); //代码高亮
 					</script>
 				{{ &OPT.codeBeforBody }}
