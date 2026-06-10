@@ -1,9 +1,9 @@
 'use strict';
 const OPT = {
-    "user" : ADMINUSER, //后台用户名，通过 wrangler.toml [vars] 或 Cloudflare Dashboard Secrets 设置
-    "password" : PASSWD, //后台密码，通过 wrangler.toml [vars] 或 Cloudflare Dashboard Secrets 设置
-    "cacheZoneId":CACHEZONEID,//清理缓存用 cf区域 ID，通过 wrangler.toml [vars] 或 Dashboard Secrets 设置
-    "cacheToken":CACHETOKEN,//清理缓存用 cf API token，通过 wrangler.toml [vars] 或 Dashboard Secrets 设置
+    "user" : ADMINUSER, //后台用户名
+    "password" : PASSWD, //后台密码
+    "cacheZoneId":CACHEZONEID,//清理缓存用 cf区域 ID
+    "cacheToken":CACHETOKEN,//清理缓存用 cf API token
 	
     "siteDomain" : "mzfaq.com",// 域名(不带https 也不带/)
     "siteName" : "CF workers blog",//博客名称

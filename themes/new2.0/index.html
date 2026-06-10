@@ -27,7 +27,7 @@
 			"svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/",
 			"svgExt": ".svg",
 			"source": {
-				"concatemoji": "https:\/\/cdn.jsdelivr.net\/gh\/gdtool\/zhaopp\/cfblog\/wp-emoji-release.min.js?ver=5.6"
+				"concatemoji": "https:\/\/cdn.jsdelivr.net\/gh\/thriken\/cloudflare-workers-blog\/cfblog\/wp-emoji-release.min.js?ver=5.6"
 			}
 		}; !
 			function (e, a, t) {
@@ -185,16 +185,24 @@
 
 		/* ===== 平板适配 (769px - 1024px) ===== */
 		@media (max-width: 1024px) and (min-width: 769px) {
-			#secondary {
-				width: 25%;
+			.site-content {
+				float: left;
+				width: 70%;
+				padding-left: 2%;
 			}
 
-			.site-content {
-				width: 72%;
+			#secondary {
+				float: right;
+				width: 26%;
 			}
 
 			.io-title-description {
 				padding: 0 10px;
+			}
+
+			.wrapper {
+				max-width: 100%;
+				box-sizing: border-box;
 			}
 		}
 
@@ -474,7 +482,7 @@
 		id="wp-embed-js"></script>
 	<script>hljs.initHighlightingOnLoad(); //代码高亮</script>
 	{{ &OPT.codeBeforBody }}
-	{{ &OPT.user }} 
+	{{ &OPT.user }}
 </body>
 
 </html>
