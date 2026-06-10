@@ -206,7 +206,12 @@ theme：new2.0
 				.tagcloud a:hover { background: var(--accent); color: #fff; }
 				/* ===== 底部 ===== */
 				.site-wordpress { text-align: center; padding: 20px; color: var(--text-3); font-size: .85rem; }
-				[data-aos] { transition-timing-function: cubic-bezier(.25,.1,.25,1); }
+				/* ===== 无障碍文本 / 老主题残留隐藏 ===== */
+				.assistive-text,
+				.themonic-nav select,
+				.clear { display: none !important; }
+
+			[data-aos] { transition-timing-function: cubic-bezier(.25,.1,.25,1); }
 				/* ======== 平板 (769-1199) ======== */
 				@media (max-width: 1199px) {
 					#secondary { width: 280px; }
