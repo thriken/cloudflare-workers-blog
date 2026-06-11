@@ -218,7 +218,7 @@ theme：new2.0
 			background: var(--card-bg);
 			border-radius: var(--radius);
 			box-shadow: var(--shadow);
-			padding: 32px 36px;
+			padding: 28px 30px;
 			margin-bottom: 24px;
 			transition: box-shadow .3s ease,transform .3s ease;
 			border: 1px solid var(--border);
@@ -228,24 +228,40 @@ theme：new2.0
 			box-shadow: var(--shadow-hover);
 			transform: translateY(-3px);
 		}
-		.entry-header { margin-bottom: 14px; }
-		.entry-title { font-size: 1.5rem; line-height: 1.4; margin: 0 0 8px; }
+
+		/* ===== 左图右文布局 ===== */
+		.post-body {
+			display: flex; gap: 22px; align-items: flex-start;
+		}
+		.post-thumb {
+			flex-shrink: 0; width: 220px;
+		}
+		.post-thumb a { display: block; }
+		.post-thumb img {
+			width: 100%; height: 140px; object-fit: cover;
+			border-radius: 10px;
+		}
+		.post-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+		.entry-header { margin-bottom: 8px; }
+		.entry-title { font-size: 1.35rem; line-height: 1.4; margin: 0 0 6px; }
 		.entry-title a {
 			color: var(--text); text-decoration: none; font-weight: 700;
 			transition: color .2s ease;
 		}
 		.entry-title a:hover { color: var(--accent); }
-		.entry-summary { color: var(--text-2); font-size: 1rem; line-height: 1.75; }
-		.entry-summary p { margin: 0; }
+
+		.entry-summary {
+			flex: 1; color: var(--text-2); font-size: .95rem; line-height: 1.7;
+			display: flex; flex-direction: column;
+		}
+		.entry-summary p { margin: 0 0 auto; }
 		.read-more a {
-			color: var(--accent); font-weight: 600; text-decoration: none;
+			color: var(--accent); font-weight: 600; text-decoration: none; font-size: .9rem;
+			align-self: flex-end; margin-top: 6px;
 			transition: color .2s ease;
 		}
 		.read-more a:hover { color: var(--accent2); }
-
-		/* 缩略图 */
-		.excerpt-thumb { margin: 0 22px 10px 0; }
-		.excerpt-thumb img { border-radius: 10px; }
 
 		/* 元信息 */
 		.entry-meta {
@@ -335,6 +351,9 @@ theme：new2.0
 			.io-title-description a[rel="home"] { font-size: 1.4rem; }
 			.site-description { display: none; }
 			.post { padding: 18px 16px; margin-bottom: 14px; border-radius: 10px; }
+			.post-body { flex-direction: column; gap: 14px; }
+			.post-thumb { width: 100%; }
+			.post-thumb img { width: 100%; height: auto; max-height: 200px; }
 			.entry-title { font-size: 1.2rem; }
 			.entry-title a { word-break: break-all; }
 			.entry-summary { font-size: .95rem; }
@@ -359,8 +378,10 @@ theme：new2.0
 			body { font-size: 1.2rem; }
 			.io-title-description a[rel="home"] { font-size: 2.2rem; }
 			.post { padding: 40px 48px; }
+			.post-thumb { width: 280px; }
+			.post-thumb img { height: 180px; }
 			.entry-title { font-size: 1.7rem; }
-			.entry-summary { font-size: 1.1rem; }
+			.entry-summary { font-size: 1.05rem; }
 			#secondary { width: 360px; }
 			.widget-title { font-size: 1.15rem; }
 			.site-header { padding: 32px 0 16px; }
@@ -374,6 +395,8 @@ theme：new2.0
 			body { font-size: 1.3rem; line-height: 1.85; }
 			.io-title-description a[rel="home"] { font-size: 2.6rem; }
 			.post { padding: 48px 56px; border-radius: 18px; }
+			.post-thumb { width: 320px; }
+			.post-thumb img { height: 210px; }
 			.entry-title { font-size: 2rem; }
 			.entry-summary { font-size: 1.2rem; line-height: 1.8; }
 			#secondary { width: 400px; }
@@ -422,25 +445,26 @@ theme：new2.0
 					{{ #articleList }}
 					<article id="post-{{&id}}" data-aos="fade-up" data-aos-duration="500"
 						class="post-{{&id}} post type-post status-publish format-standard has-post-thumbnail hentry category-4">
-						<header class="entry-header">
-							<h2 class="entry-title">
-								<a href="/article/{{&id}}/{{&link}}.html" title="{{ &title }}" rel="{{ &title }}">{{
-									&title }}</a>
-							</h2>
-						</header>
-						<!-- .entry-header -->
-						<div class="entry-summary">
-							<div class="excerpt-thumb">
+						<div class="post-body">
+							<div class="post-thumb">
 								<a href="/article/{{&id}}/{{&link}}.html" title="{{ &title }}" rel="bookmark">
-									<img width="200" height="112" src="{{ &img }}" class="alignleft wp-post-image"
-										alt="" loading="lazy" /></a>
+									<img src="{{ &img }}" alt="{{ &title }}" loading="lazy" /></a>
 							</div>
-							<p>{{ &contentText }} ...
-								<span class="read-more">
-									<a href="/article/{{&id}}/{{&link}}.html">继续阅读 &raquo;</a></span>
-							</p>
+							<div class="post-info">
+								<header class="entry-header">
+									<h2 class="entry-title">
+										<a href="/article/{{&id}}/{{&link}}.html" title="{{ &title }}" rel="{{ &title }}">{{
+											&title }}</a>
+									</h2>
+								</header>
+								<div class="entry-summary">
+									<p>{{ &contentText }} ...</p>
+									<span class="read-more">
+										<a href="/article/{{&id}}/{{&link}}.html">继续阅读 &raquo;</a></span>
+								</div>
+								<!-- .entry-summary -->
+							</div>
 						</div>
-						<!-- .entry-summary -->
 						<footer class="entry-meta">
 							<span>分类:
 								{{ #category }}
